@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'home_module',
+    "blog_module.apps.BlogModuleConfig"
     'django_render_partial',
 ]
 
