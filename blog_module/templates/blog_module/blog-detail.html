@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+    {{ object.title }}
+    {{ object.description }}
+    {{ object.created_at }}
+<br>
+{{ object.author }}
+    {% for tag in object.tags.all %}
+    	{{ tag.title }}
+    {% endfor %}
+<br>
+    {{ object.category.title }}
+{{ object.tags.title }}
+</body>
+</html>
