@@ -5,7 +5,7 @@ from autoslug import AutoSlugField
 # Create your models here.
 class Category(models.Model):
     title = models.CharField(max_length=100)
-    slug = AutoSlugField(populate_from='name', unique=True, always_update=True)
+    slug = AutoSlugField(populate_from='title', unique=True, always_update=True)
 
 class Company(models.Model):
     name = models.CharField(max_length=100)
@@ -13,7 +13,7 @@ class Company(models.Model):
 
 class Product(models.Model):
     title = models.CharField(max_length=100)
-    slug = AutoSlugField(populate_from='name', unique=True, always_update=True)
+    slug = AutoSlugField(populate_from='title', unique=True, always_update=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='products')
     price = models.IntegerField()
     stock = models.IntegerField()

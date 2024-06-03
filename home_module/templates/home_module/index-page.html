@@ -1,23 +1,10 @@
+{% extends 'shared/_layout.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="zxx">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="description" content="Ogani Template">
-    <meta name="keywords" content="Ogani, unica, creative, html">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Ogani | Template</title>
-
-{% include 'shared/header_references.html' %}
-</head>
-
-<body>
-{% include 'shared/site_header_component.html' %}
-
-
-    <!-- Categories Section Begin -->
+{% block title %}
+	index
+{% endblock %}
+{% block content %}
+	    <!-- Categories Section Begin -->
     <section class="categories">
         <div class="container">
             <div class="row">
@@ -482,10 +469,4 @@
     </section>
     <!-- Blog Section End -->
 
-{% include 'shared/site_footer_component.html' %}
-
-{% include 'shared/footer_references.html' %}
-
-</body>
-
-</html>
+{% endblock %}
