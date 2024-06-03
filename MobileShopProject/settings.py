@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'home_module',
     "blog_module.apps.BlogModuleConfig",
     "shop_module.apps.ShopModuleConfig",
+    "account_module.apps.AccountModuleConfig",
 
     'django_render_partial',
 ]

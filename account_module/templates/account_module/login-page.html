@@ -1,0 +1,22 @@
+{% extends 'shared/_layout.html' %}
+{% block title %}
+	Login page
+{% endblock %}
+
+{% block content %}
+    <div class="section">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+                <form method="post" action="{% url 'account:login' %}">
+                    {% csrf_token %}
+                    {{ login_form }}
+                    <br>
+                    <button class="primary-btn order-submit" type="submit">Submit</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
