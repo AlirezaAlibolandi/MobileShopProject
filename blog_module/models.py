@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 from autoslug import AutoSlugField
+from django.urls import reverse
 # Create your models here.
 class Category(models.Model):
     title = models.CharField(max_length=100)
@@ -22,3 +23,9 @@ class Article(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     is_active = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse('blog:article_detail',args=[self.slug])

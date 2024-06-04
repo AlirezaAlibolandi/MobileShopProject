@@ -1,33 +1,68 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-{% for object in object_list %}
-            <li>
-                <a>{{ object.title }}</a>
-                <a>{{ object.short_description }}</a>
-            </li>
+{% extends 'shared/_layout.html' %}
+{% load render_partial %}
 
-{% endfor %}
-    <div class="pagination">
-        <span class="step-links">
-            {% if articles.has_previous %}
-                <a href="?page=1">&laquo; first</a>
-                <a href="?page={{ articles.previous_page_number }}">previous</a>
-            {% endif %}
+{% block title %}
+    list
+{% endblock %}
+{% block content %}
 
-            <span class="current">
-                Page {{ articles.number }} of {{ articles.paginator.num_pages }}.
-            </span>
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                        <h2>Blog</h2>
+                        <div class="breadcrumb__option">
+                            <a href="./index.html">Home</a>
+                            <span>Blog</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
 
-            {% if articles.has_next %}
-                <a href="?page={{ articles.next_page_number }}">next</a>
-                <a href="?page={{ articles.paginator.num_pages }}">last &raquo;</a>
-            {% endif %}
-        </span>
-    </div>
-</body>
-</html>
+    <!-- Blog Section Begin -->
+    <section class="blog spad">
+        <div class="container">
+            <div class="row">
+                {% render_partial 'blog_module.views.blog_sidebar_component' %}
+                <div class="col-lg-8 col-md-7">
+                    <div class="row">
+                    {% if object_list %}
+                        {% for object in object_list %}
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                <div class="blog__item">
+                                    <div class="blog__item__pic">
+                                        <img src="{{ object.image.url }}" alt="">
+                                    </div>
+                                    <div class="blog__item__text">
+                                        <ul>
+                                            <li><i class="fa fa-calendar-o"></i>{{ object.created_at.date }}</li>
+                                            <li><i class="fa fa-comment-o"></i> 5</li>
+                                        </ul>
+                                        <h5><a href="#">{{ object.title }}</a></h5>
+                                        <p>{{ object.short_description }}</p>
+                                        <a href="{{ object.get_absolute_url }}" class="blog__btn">READ MORE <span class="arrow_right"></span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                        <div class="col-lg-12">
+                            <div class="product__pagination blog__pagination">
+                                <a href="#">1</a>
+                                <a href="#">2</a>
+                                <a href="#">3</a>
+                                <a href="#"><i class="fa fa-long-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Blog Section End -->
+{% endblock %}
