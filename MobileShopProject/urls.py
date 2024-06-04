@@ -24,4 +24,5 @@ urlpatterns = [
     path('account/', include('account_module.urls')),
     path('blog/', include('blog_module.urls')),
     path('shop/', include('shop_module.urls')),
+    path('api/', include('rest_api.urls')),
 ]
