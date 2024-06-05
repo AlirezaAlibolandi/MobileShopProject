@@ -24,7 +24,7 @@ SECRET_KEY = 'django-insecure-q*u4_ak*e-q2ga%k5-fklnv2pp(jel+@ms-369+c#!d(t@iie6
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -43,6 +43,8 @@ INSTALLED_APPS = [
 
     'django_render_partial',
     'rest_framework',
+    'sorl.thumbnail',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
@@ -54,6 +56,12 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+CSRF_TRUSTED_ORIGINS = [
+    'https://ef0a-151-240-219-139.ngrok-free.app',
+    'https://burro-fluent-treefrog.ngrok-free.app'
+]
+
+
 
 ROOT_URLCONF = 'MobileShopProject.urls'
 
@@ -107,7 +115,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'fa-ir'
 
 TIME_ZONE = 'UTC'
 

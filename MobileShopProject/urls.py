@@ -28,3 +28,8 @@ urlpatterns = [
     path('api/', include('rest_api.urls')),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+admin.site.site_header = 'ادمین موبایل شاپ'
+admin.site.site_title = 'ادمین موبایل شاپ'
+admin.site.index_title = 'به پنل ادمین موبایل شاپ خوش آمدید'

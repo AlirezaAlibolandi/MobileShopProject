@@ -46,6 +46,7 @@ class Article(models.Model):
     class Meta:
         verbose_name = 'مقاله'
         verbose_name_plural = 'مقالات'
+        ordering =['-created_at']
 
     def get_slug(self):
         return slugify(self.title, separator='-', lowercase=True, replacements=[(' ', '-')])
