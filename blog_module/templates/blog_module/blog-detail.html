@@ -1,6 +1,7 @@
 {% extends 'shared/_layout.html' %}
 {% load render_partial %}
 {% load thumbnail %}
+{% load static %}
 {% block title %}
     blog
 {% endblock %}
@@ -8,7 +9,7 @@
 {% block content %}
 
     <!-- Blog Details Hero Begin -->
-    <section class="blog-details-hero set-bg" data-setbg="img/blog/details/details-hero.jpg">
+    <section class="blog-details-hero set-bg" data-setbg="{% static 'img/breadcrumb.jpg' %}">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -17,7 +18,7 @@
                         <ul>
                             <li>By {{ object.author }}</li>
                             <li>{{ object.created_at.date }}</li>
-                            <li>8 Comments</li>
+{#                            <li>8 Comments</li>#}
                         </ul>
                     </div>
                 </div>
@@ -102,7 +103,7 @@
                             <div class="blog__item__text">
                                 <ul>
                                     <li><i class="fa fa-calendar-o"></i> {{ object.created_at.date }}</li>
-                                    <li><i class="fa fa-comment-o"></i> 5</li>
+{#                                    <li><i class="fa fa-comment-o"></i> 5</li>#}
                                 </ul>
                                 <h5><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></h5>
                                 <p>{{ article.short_description }}</p>

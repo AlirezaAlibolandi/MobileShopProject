@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "shop_module.apps.ShopModuleConfig",
     "account_module.apps.AccountModuleConfig",
     "rest_api.apps.RestApiConfig",
+    "order_module.apps.OrderModuleConfig",
 
     'django_render_partial',
     'rest_framework',
@@ -137,3 +138,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+LOGIN_URL = 'account/login'

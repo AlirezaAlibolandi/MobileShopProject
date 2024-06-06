@@ -14,3 +14,9 @@ class ProductDetailView(DetailView):
     template_name = 'shop_module/shop-detail.html'
     slug_field = 'slug'
     slug_url_kwarg = 'slug'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['recommended_articles'] = Product.objects.exclude(slug=self.object.slug).order_by('?')[:3]
+        print(context)
+        return context
