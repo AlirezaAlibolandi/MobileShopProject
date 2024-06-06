@@ -51,7 +51,7 @@
                                         <li><i class="fa fa-calendar-o"></i>{{ article.created_at.date }}</li>
                                         <li><i class="fa fa-comment-o"></i> 5</li>
                                     </ul>
-                                    <h5><a href="#">{{ article.title }}</a></h5>
+                                    <h5><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></h5>
                                     <p>{{ article.short_description }}</p>
                                 </div>
                             </div>

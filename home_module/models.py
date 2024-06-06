@@ -18,6 +18,9 @@ class ContactUs(models.Model):
     email = models.EmailField()
     message = models.TextField()
     ip_address = models.GenericIPAddressField()
+
+    def __str__(self):
+        return f'{self.name} - {self.email}'
     class Meta:
         verbose_name = 'Contact Us'
         verbose_name_plural = 'Contact Us'

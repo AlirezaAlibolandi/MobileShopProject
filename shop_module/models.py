@@ -1,7 +1,7 @@
 from django.db import models
 from autoslug import AutoSlugField
 from slugify import slugify
-
+from django.urls import reverse
 # Create your models here.
 class Category(models.Model):
     title = models.CharField(max_length=100, verbose_name='عنوان')
@@ -48,6 +48,9 @@ class Product(models.Model):
 
     def get_slug(self):
         return slugify(self.title, separator='-', lowercase=True, replacements=[(' ', '-')])
+
+    def get_absolute_url(self):
+        return reverse('shop:detail', args=[self.slug])
 
     def __str__(self):
         return self.title
