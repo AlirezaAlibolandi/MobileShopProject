@@ -10,6 +10,8 @@ from account_module.forms import RegisterForm, LoginForm
 
 class RegisterView(View):
     def get(self, request):
+        if request.user.is_authenticated:
+            return HttpResponse('baraye sabt nam kharej shavid')
         form = RegisterForm()
         return render(request, 'account_module/register_page.html', {'register_form': form})
 
@@ -17,7 +19,7 @@ class RegisterView(View):
         form = RegisterForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('home:index')
+            return HttpResponse(f"Dear, {form.cleaned_data['username']} registered successfully")
         return render(request, 'account_module/register_page.html', {'register_form': form})
 
 

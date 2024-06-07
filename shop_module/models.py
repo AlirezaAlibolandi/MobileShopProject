@@ -2,9 +2,12 @@ from django.db import models
 from autoslug import AutoSlugField
 from slugify import slugify
 from django.urls import reverse
+
+
 # Create your models here.
 class Category(models.Model):
     title = models.CharField(max_length=100, verbose_name='عنوان')
+    image = models.ImageField(upload_to='category/', verbose_name='تصویر دسته بندی', null=True, blank=True)
     slug = AutoSlugField(populate_from='title', unique=True, always_update=True)
 
     class Meta:

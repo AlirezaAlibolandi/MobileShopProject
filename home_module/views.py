@@ -2,16 +2,21 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.generic import View
 
-from shop_module.models import Company
+from shop_module.models import Company, Product, Category
 from blog_module.models import Article
 from .forms import EmailSubscriberForm, ContactUsForm
+from order_module.models import OrderDetail, Order
 
 
 # Create your views here.
 def index(request):
-    articles = Article.objects.all()[:3]
+    products = Product.objects.all()
+    articles = Article.objects.all().prefetch_related('category')[:3]
+    categories = Category.objects.all()
     context = {
-        'articles': articles
+        'articles': articles,
+        'products': products,
+        'categories': categories,
     }
     return render(request, 'home_module/index-page.html', context)
 
@@ -19,7 +24,7 @@ def index(request):
 def site_header_component(request):
     brands = Company.objects.all()
     context = {
-        'brands': brands
+        'brands': brands,
     }
     return render(request, 'shared/site_header_component.html', context)
 
