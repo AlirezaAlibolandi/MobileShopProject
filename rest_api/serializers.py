@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from shop_module.models import Product ,Category,Company,Images
+from blog_module.models import Article
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
@@ -19,3 +20,9 @@ class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = ['id','title','slug','price','stock','short_description','description','weight','size']
+
+
+class BlogSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Article
+        fields = '__all__'
