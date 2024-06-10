@@ -33,7 +33,7 @@ class Tag(models.Model):
 class Article(models.Model):
     title = models.CharField(max_length=100, verbose_name='عنوان')
     author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='نویسنده')
-    slug = AutoSlugField(populate_from='get_slug', unique=True, always_update=True)
+    slug = models.SlugField(unique=True, null=True, blank=True, allow_unicode=True)
     description = models.TextField(verbose_name='توضیحات')
     short_description = models.CharField(max_length=300, verbose_name='توضیحات کوتاه')
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, verbose_name='دسته بندی')
@@ -48,9 +48,11 @@ class Article(models.Model):
         verbose_name_plural = 'مقالات'
         ordering =['-created_at']
 
-    def get_slug(self):
-        return slugify(self.title, separator='-', lowercase=True, replacements=[(' ', '-')])
 
+    def save(self, *args, **kwargs):
+        if self.title:
+            self.slug = slugify(self.title, allow_unicode=True)
+            super().save(*args, **kwargs)
     def __str__(self):
         return self.title
 

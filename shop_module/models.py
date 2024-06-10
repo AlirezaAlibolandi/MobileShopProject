@@ -32,7 +32,7 @@ class Company(models.Model):
 
 class Product(models.Model):
     title = models.CharField(max_length=100, verbose_name='عنوان')
-    slug = AutoSlugField(populate_from='get_slug', unique=True, always_update=True)
+    slug = models.SlugField(unique=True, null=True, blank=True, allow_unicode=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='products', verbose_name='دسته بندی')
     price = models.IntegerField(verbose_name='قیمت')
     stock = models.IntegerField(verbose_name='تعداد در انبار')
@@ -49,8 +49,10 @@ class Product(models.Model):
         verbose_name = 'محصول'
         verbose_name_plural = 'محصولات'
 
-    def get_slug(self):
-        return slugify(self.title, separator='-', lowercase=True, replacements=[(' ', '-')])
+    def save(self, *args, **kwargs):
+        if self.title:
+            self.slug = slugify(self.title, allow_unicode=True)
+            super().save(*args, **kwargs)
 
     def get_absolute_url(self):
         return reverse('shop:detail', args=[self.slug])
