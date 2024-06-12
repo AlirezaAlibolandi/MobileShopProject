@@ -1,8 +1,9 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, HttpResponse
 from django.views import View
 from django.contrib.auth import authenticate, login, logout
-from account_module.forms import RegisterForm, LoginForm
-
+from account_module.forms import RegisterForm, LoginForm, ProfileForm, UserForm
+from .models import UserInformation
 
 
 # Create your views here.
@@ -45,7 +46,6 @@ class LoginView(View):
                 return render(request, 'account_module/login-page.html', {'login_form': form})
 
 
-
 class LogoutView(View):
     def get(self, request):
         username = request.user.username
@@ -54,3 +54,29 @@ class LogoutView(View):
             return HttpResponse(f'Dear {username}, you have successfully logged out')
         else:
             return redirect('account:login')
+
+
+@login_required
+def profile(request):
+    user = request.user
+    user_information, created = UserInformation.objects.get_or_create(user=user)
+
+    if request.method == 'POST':
+        user_form = UserForm(request.POST, instance=user)
+        user_information_form = ProfileForm(request.POST, request.FILES, instance=user_information)
+
+        if user_form.is_valid() and user_information_form.is_valid():
+            user_form.save()
+            user_information_form.save()
+            return redirect('account:profile')
+    else:
+        user_form = UserForm(instance=user)
+        user_information_form = ProfileForm(instance=user_information)
+
+    context = {
+        'user_form': user_form,
+        'user_information_form': user_information_form
+    }
+
+    return render(request, 'account_module/profile.html', context)
+

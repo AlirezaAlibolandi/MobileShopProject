@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
+from .models import UserInformation
 
 
 class RegisterForm(forms.ModelForm):
@@ -34,3 +35,12 @@ class RegisterForm(forms.ModelForm):
 class LoginForm(forms.Form):
     username = forms.CharField(max_length=150, widget=forms.TextInput(attrs={'class': 'form-control'}))
     password = forms.CharField(max_length=150, widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+
+class UserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'email',]
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = UserInformation
+        fields = ['birth_date','phone_number','address','image']
