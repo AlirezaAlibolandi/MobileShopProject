@@ -2,7 +2,10 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, HttpResponse
 from django.views import View
 from django.contrib.auth import authenticate, login, logout
-from account_module.forms import RegisterForm, LoginForm, ProfileForm, UserForm
+from account_module.forms import RegisterForm, LoginForm, ProfileForm, UserForm,ChangePasswordForm
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.views import PasswordChangeView
+from django.urls import reverse_lazy
 from .models import UserInformation
 
 
@@ -22,8 +25,6 @@ class RegisterView(View):
             form.save()
             return HttpResponse(f"Dear, {form.cleaned_data['username']} registered successfully")
         return render(request, 'account_module/register_page.html', {'register_form': form})
-
-
 class LoginView(View):
     def get(self, request):
         if request.user.is_authenticated:
@@ -44,8 +45,6 @@ class LoginView(View):
             else:
                 form.add_error('username', 'Your username or password is incorrect')
                 return render(request, 'account_module/login-page.html', {'login_form': form})
-
-
 class LogoutView(View):
     def get(self, request):
         username = request.user.username
@@ -54,8 +53,6 @@ class LogoutView(View):
             return HttpResponse(f'Dear {username}, you have successfully logged out')
         else:
             return redirect('account:login')
-
-
 @login_required
 def profile(request):
     user = request.user
@@ -80,3 +77,7 @@ def profile(request):
 
     return render(request, 'account_module/profile.html', context)
 
+class ChangePasswordView(PasswordChangeView):
+    form_class = PasswordChangeForm
+    success_url = reverse_lazy('home')
+    template_name = 'account_module/profile-password.html'
