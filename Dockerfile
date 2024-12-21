@@ -15,4 +15,4 @@ COPY . .
 
 EXPOSE 8000
 
-CMD ["gunicorn", "projectname.wsgi:application", "--bind", "0.0.0.0:8000"]
+CMD ["gunicorn", "MobileShopProject.wsgi:application", "--bind", "0.0.0.0:8000"]
